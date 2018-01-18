@@ -15,6 +15,14 @@ class FlightService : public Servant
     {
         TLOGDEBUG("Enter " << __PRETTY_FUNCTION__ << endl);
     }
+    virtual int onDispatch(TarsCurrentPtr current, vector<char> &buffer)
+    {
+        const vector<char> & req = current->getRequestBuffer();
+        TLOGDEBUG(__PRETTY_FUNCTION__ << " request.FuncName=" << current->getFuncName()
+                                      << " request.DataSize=" << req.size()
+                                      << endl);
+        return TARSSERVERSUCCESS;
+    }
 };
 
 // Tars框架实现类
