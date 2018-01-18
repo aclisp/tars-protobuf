@@ -1,5 +1,6 @@
 #include <iostream>
 #include "servant/Application.h"
+#include "flight.pb.h"
 
 using namespace std;
 using namespace tars;
@@ -21,6 +22,22 @@ class FlightService : public Servant
         TLOGDEBUG(__PRETTY_FUNCTION__ << " request.FuncName=" << current->getFuncName()
                                       << " request.DataSize=" << req.size()
                                       << endl);
+        bool ok;
+        string sBuffer(req.begin(), req.end());
+        com::yy::tars::demo::flight::QueryFlightRequest request;
+        ok = request.ParseFromString(sBuffer);
+        assert(ok);
+        TLOGDEBUG(__PRETTY_FUNCTION__ << " request.Data.name=" << request.name()
+                                      << " request.Data.password=" << request.password()
+                                      << " request.Data.departureCity=" << request.departurecity()
+                                      << " request.Data.destinationCity=" << request.destinationcity()
+                                      << endl);
+        com::yy::tars::demo::flight::QueryFlightResponse response;
+        response.set_errcode(0);
+        response.set_errmsg("Success.");
+        response.set_flightsinfo("XT3697");
+        response.SerializeToString(&sBuffer);
+        buffer.assign(sBuffer.begin(), sBuffer.end());
         return TARSSERVERSUCCESS;
     }
 };

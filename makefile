@@ -7,7 +7,9 @@ CONFIG    :=
 STRIP_FLAG:= N
 
 INCLUDE   += 
-LIB       += 
+LIB       += -lprotobuf
+
+LOCAL_SRC += flight.pb.cc
 
 #-----------------------------------------------------------------------
 
