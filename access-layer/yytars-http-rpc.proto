@@ -1,0 +1,28 @@
+package yytars;
+
+message HttpRequestPacket {
+    required uint32 version = 1;
+    required uint32 packetType = 2 [default = 0];
+    required uint32 messageType = 3 [default = 0];
+    required uint32 requestId = 4;
+    required string servantName = 5;
+    required string funcName = 6;
+    required bytes  buffer = 7;
+    required uint32 timeout = 8 [default = 0];
+    map<string, string> context = 9;
+    map<string, string> status = 10;
+};
+
+message HttpResponsePacket {
+    required uint32 version = 1;
+    required uint32 packetType = 2 [default = 0];
+    required uint32 messageType = 3 [default = 0];
+    required uint32 requestId = 4;
+    required string servantName = 5;
+    required string funcName = 6;
+    required sint32 retCode = 7 [default = 0];
+    required bytes  buffer = 8;
+    map<string, string> context = 9;
+    map<string, string> status = 10;
+    optional string resultDesc = 11;
+};
